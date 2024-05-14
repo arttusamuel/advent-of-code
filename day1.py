@@ -28,7 +28,11 @@ def get_calibration_value(string):
 def sum_of_calibrations():
     sum = 0
     try:
+<<<<<<< HEAD
         with open("input-day1.txt", "r") as file:
+=======
+        with open("input.txt", "r") as file:
+>>>>>>> origin/main
             for content in file:
                 calibration_value = get_calibration_value(content.strip())
                 print("Calibration value and type: ", calibration_value, type(calibration_value))
