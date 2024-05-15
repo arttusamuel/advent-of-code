@@ -3,6 +3,7 @@ def get_calibration_value(string):
     char_numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     char1 = ""
     char2 = ""
+
     if (string != ""):
         while(char1 == ""):
             for char in string:
@@ -25,22 +26,20 @@ def get_calibration_value(string):
         pass
 
 
-def sum_of_calibrations():
+def sum_of_calibrations() -> int:
     sum = 0
     try:
-<<<<<<< HEAD
-        with open("input-day1.txt", "r") as file:
-=======
-        with open("input.txt", "r") as file:
->>>>>>> origin/main
+        with open("Day1/input-day1.txt", "r") as file:
             for content in file:
                 calibration_value = get_calibration_value(content.strip())
-                print("Calibration value and type: ", calibration_value, type(calibration_value))
+                #print("Calibration value and type: ", calibration_value, type(calibration_value))
                 sum += int(calibration_value)
-                print(content)
+                #print(content)
             return sum
     except ValueError:
         print("String value not valid integer")
         return sum
 
 print("Sum of calibrations is: ", sum_of_calibrations())
+x = sum_of_calibrations()
+print("Printing x as sum_of_calibrations: ", x)
