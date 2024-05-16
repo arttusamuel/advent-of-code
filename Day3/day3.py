@@ -1,4 +1,3 @@
-import numpy as np
 
 test_matrix = [
 ['#', '.', '.' , '.', '#', '.' '.', '.'],
@@ -30,8 +29,26 @@ def create_matrix_row(y):
 create_matrix(3,5)
 create_matrix_row(5)
 
-# Format input into to a matrix
-def format_to_matrix(input):
+# Format input into to a matrix -- Should work --
+def format_to_matrix():
+    data = []
+    try:
+        with open('Day3/test_data.txt', "r") as file:
+            lines = file.readlines()
+            
+            for line in lines:
+                line = line.strip()
+                char_list = list(line)
+                char_list.insert(0, '.') # Additional dot to first element
+                char_list.insert(-1, '.') # Additional dot to last element
+                data.append(char_list)
+
+            data.insert(0, ['.'] * len(char_list)) # Additional dot -row to first element
+            data.append(['.'] * len(char_list)) # Additional dot -row to last element
+            print("\nData input:\n", data)
+        return data
+    except Exception as e:
+        print("Unexpected", e)
     return 
 
 
@@ -52,7 +69,6 @@ def sum_values_with_adjacents(input_matrix):
 
                 # Catches indexError, but program doesn't process integers on the edges
                 try:
-
                     while(input_matrix[i][j+int_len].isdigit()):
                         int_string += input_matrix[i][j+int_len]
                         int_len += 1               
@@ -93,5 +109,6 @@ def sum_values_with_adjacents(input_matrix):
 
     return sum
 
-answer = sum_values_with_adjacents(test_matrix)
+real_matrix = format_to_matrix()
+answer = sum_values_with_adjacents(real_matrix)
 print(answer)
