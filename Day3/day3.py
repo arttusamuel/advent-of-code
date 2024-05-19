@@ -1,4 +1,29 @@
+# The engine schematic (your puzzle input) consists of a visual representation of the engine. 
+# There are lots of numbers and symbols you don't really understand, but apparently any number 
+# adjacent to a symbol, even diagonally, is a "part number" and should be included in your sum. 
+# (Periods (.) do not count as a symbol.)
 
+# Here is an example engine schematic:
+
+# 467..114..
+# ...*......
+# ..35..633.
+# ......#...
+# 617*......
+# .....+.58.
+# ..592.....
+# ......755.
+# ...$.*....
+# .664.598..
+
+# In this schematic, two numbers are not part numbers because they are not adjacent to a symbol: 
+# 114 (top right) and 58 (middle right). Every other number is adjacent to a symbol and so is a part number; 
+# their sum is 4361.
+
+# Of course, the actual engine schematic is much larger. What is the sum of all of the part numbers in the engine schematic?
+# Task is to count sum of all integers that has a symbol other than a '.' adjacent to it.
+
+# Test matrix
 test_matrix = [
 ['#', '.', '.' , '.', '#', '.' '.', '.'],
 ['.', '.', '.', '1', '.', '.' '.', '.'],
@@ -9,7 +34,8 @@ test_matrix = [
 ['.', '4', '4', '#', '.', '.' '#', '.'],
 ['.', '.', '.', '.', '.', '.' '5', '.']
 ]
-# Task is to count sum of all integers that has a symbol other than a '.' adjacent to it.
+
+# Not in use at the moment
 def create_matrix(x, y):
     matrix = [[0]*y for _ in range(x)]
     if x % 2 == 1:
@@ -19,6 +45,7 @@ def create_matrix(x, y):
         middle_row[-1:] = [1]
         middle_row[1:-1] = [0] * (y-2)
 
+# Creates a row (list) where 0's take integers place 
 def create_matrix_row(y):
     row = [0]*y
     row[0:1] = [-1]
@@ -26,10 +53,11 @@ def create_matrix_row(y):
     row[1:-1] = [0] * (y-2)
     return row
 
+# Testing matrix and row formation
 create_matrix(3,5)
 create_matrix_row(5)
 
-# Format input into to a matrix -- Should work --
+# Format input data to a matrix -- Should work --
 def format_to_matrix():
     data = []
     try:
@@ -50,8 +78,6 @@ def format_to_matrix():
     except Exception as e:
         print("Unexpected", e)
     return 
-
-
 
 # Setting all integers that are not adjacent to a non '.' symbol
 def sum_values_with_adjacents(input_matrix):
@@ -76,9 +102,8 @@ def sum_values_with_adjacents(input_matrix):
                 except IndexError as e:
                     print("An IndexError occurred:", "e")
                     continue
-                    
 
-                # Create a matrix of neigbours to check
+                # Create a matrix of neigbours to check, takes influence of a "convolution" type processing. 
                 neighbours_row = create_matrix_row(int_len+2) # Matrix row with int placed with 1's
                 print(neighbours_row)
                 add_sum = False # Change to True when sum needs to be counted
@@ -106,7 +131,6 @@ def sum_values_with_adjacents(input_matrix):
                     sum += int(int_string) # Add value to sum
                     add_sum = False
                     break
-
     return sum
 
 real_matrix = format_to_matrix()
